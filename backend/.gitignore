@@ -1,11 +1,3 @@
-# --- AI prompt files (Gemini) ---
-1_overview.md
-2_models.md
-3_auth.md
-4_endpoints.md
-5_migrations.md
-6_readme.md
-
 # --- Python ---
 __pycache__/
 *.pyc

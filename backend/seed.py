@@ -17,6 +17,7 @@ def init_db(db: Session) -> None:
         user_in = UserCreate(
             email=settings.FIRST_SUPERUSER_EMAIL,
             password=settings.FIRST_SUPERUSER_PASSWORD,
+            full_name="Admin User", # Added full_name
             is_active=True,
         )
         user = crud_user.create(db, obj_in=user_in)

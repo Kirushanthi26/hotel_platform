@@ -14,6 +14,7 @@ This project provides a development-ready backend for an Internal Hotel Admin To
 ## Setup & Running
 
 1.  **Create and activate a virtual environment**:
+
     ```bash
     python -m venv venv
     # On Windows
@@ -23,6 +24,7 @@ This project provides a development-ready backend for an Internal Hotel Admin To
     ```
 
 2.  **Install dependencies**:
+
     ```bash
     pip install -r requirements.txt
     ```
@@ -43,12 +45,15 @@ This project provides a development-ready backend for an Internal Hotel Admin To
 
 4.  **Run Alembic migrations**:
     This will create all the necessary tables in your database.
+
     ```bash
+    .\venv\Scripts\activate
     alembic upgrade head
     ```
 
 5.  **Seed the database**:
     This script populates the database with initial data, including a default admin user, a hotel, room types, and a rate adjustment. It is safe to run multiple times.
+
     ```bash
     python seed.py
     ```
@@ -66,6 +71,7 @@ Once the server is running, you can access the interactive API documentation (Sw
 ## Seed User
 
 The seed script creates a default user with the following credentials:
+
 - **Email**: `admin@hotel.com`
 - **Password**: `admin123`
 

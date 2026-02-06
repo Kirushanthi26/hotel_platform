@@ -1,27 +1,19 @@
-# Hotel Admin Backend
+# Internal Hotel Admin Tool — Backend
 
-A development-ready backend for an Internal Hotel Admin Tool, built with FastAPI, SQLAlchemy, and Alembic.
+This project provides a development-ready backend for an Internal Hotel Admin Tool, built with FastAPI.
 
 ## Tech Stack
 
-- Python 3.10+
-- FastAPI
-- SQLAlchemy (modern style)
-- Alembic
-- Database: SQLite (default)
-- Authentication: JWT
+- **Python 3.10+**
+- **FastAPI**: For the web framework.
+- **SQLAlchemy**: For the ORM.
+- **Alembic**: For database migrations.
+- **SQLite**: Default database for local development.
+- **JWT Auth**: For API authentication.
 
-## Setup
+## Setup & Running
 
-1.  **Clone the repository**:
-
-    ```bash
-    git clone <repository_url>
-    cd hotel_platform/backend
-    ```
-
-2.  **Create and activate a virtual environment**:
-
+1.  **Create and activate a virtual environment**:
     ```bash
     python -m venv venv
     # On Windows
@@ -30,29 +22,56 @@ A development-ready backend for an Internal Hotel Admin Tool, built with FastAPI
     source venv/bin/activate
     ```
 
-3.  **Install dependencies**:
-
+2.  **Install dependencies**:
     ```bash
     pip install -r requirements.txt
     ```
 
-4.  **Database Migrations (Alembic)**:
+3.  **Create a `.env` file**:
+    Create a file named `.env` in the project root and add the following environment variables.
 
-    First, ensure your `alembic.ini` is configured correctly and your `env.py` points to your SQLAlchemy models.
+    ```env
+    DATABASE_URL=sqlite:///./dev.db
+    SECRET_KEY=a-very-secret-key-that-you-should-change
+    ACCESS_TOKEN_EXPIRE_MINUTES=60
+    ALGORITHM=HS256
 
-    To create initial migrations (after defining your models in `app/models.py`):
+    # Default admin user credentials for seeding
+    FIRST_SUPERUSER_EMAIL=admin@hotel.com
+    FIRST_SUPERUSER_PASSWORD=admin123
+    ```
 
+4.  **Run Alembic migrations**:
+    This will create all the necessary tables in your database.
     ```bash
-    alembic revision --autogenerate -m "Initial migration"
     alembic upgrade head
     ```
 
-## Running the Application
+5.  **Seed the database**:
+    This script populates the database with initial data, including a default admin user, a hotel, room types, and a rate adjustment. It is safe to run multiple times.
+    ```bash
+    python seed.py
+    ```
 
-To start the FastAPI development server:
+6.  **Start the server**:
+    ```bash
+    uvicorn app.main:app --reload
+    ```
 
-```bash
-uvicorn app.main:app --reload
-```
+## API Documentation
 
-The API documentation will be available at `http://127.0.0.1:8000/docs`.
+Once the server is running, you can access the interactive API documentation (Swagger UI) at:
+[http://localhost:8000/docs](http://localhost:8000/docs)
+
+## Seed User
+
+The seed script creates a default user with the following credentials:
+- **Email**: `admin@hotel.com`
+- **Password**: `admin123`
+
+You can use these credentials to log in and get an access token from the `/api/v1/login/access-token` endpoint.
+
+## Notes
+
+- The application uses **SQLite** by default for simplicity and quick setup. You can switch to **PostgreSQL** by updating the `DATABASE_URL` in your `.env` file.
+- This project intentionally omits role-based access control. Any authenticated user can perform all CRUD operations.

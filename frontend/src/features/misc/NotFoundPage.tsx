@@ -16,18 +16,6 @@ export const NotFoundPage = () => {
                 We couldn&apos;t find the content you were looking for
             </span>
 
-            <span className="mt-2 text-Gray-600">
-                If the problem reoccurs please
-                <a
-                    className="pl-2 text-sky-500 active:outline-none focus:outline-none"
-                    href=""
-                    rel="noreferrer"
-                    target="_blank"
-                >
-                    contact us
-                </a>
-            </span>
-
             <Button
                 variant="default"
                 size="lg"

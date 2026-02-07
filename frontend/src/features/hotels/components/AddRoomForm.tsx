@@ -34,12 +34,13 @@ export type RoomFormValues = z.infer<typeof roomFormSchema>
 
 interface AddRoomFormProps {
   onSubmit: (values: RoomFormValues) => void;
+  initialValues?: RoomFormValues;
 }
 
-export function AddRoomForm({ onSubmit }: AddRoomFormProps) {
+export function AddRoomForm({ onSubmit, initialValues }: AddRoomFormProps) {
   const form = useForm<RoomFormValues>({
     resolver: zodResolver(roomFormSchema),
-    defaultValues: {
+    defaultValues: initialValues || {
       name: "",
       base_rate: 1.00,
       capacity: 1,
@@ -98,7 +99,7 @@ export function AddRoomForm({ onSubmit }: AddRoomFormProps) {
             </FormItem>
           )}
         />
-        <Button type="submit">Add Room Type</Button>
+        <Button type="submit">{initialValues ? 'Update Room Type' : 'Add Room Type'}</Button>
       </form>
     </Form>
   )

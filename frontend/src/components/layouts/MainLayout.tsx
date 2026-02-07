@@ -3,9 +3,9 @@ import { Navbar } from "./navbar/Navbar"
 
 export const MainLayout = () => {
     return (
-        <div>
+        <div className="bg-gray-50 h-screen">
             <Navbar />
-            <main className=" bg-gray-50 p-8 max-h-[92vh] overflow-y-scroll scrollbar-hide">
+            <main className="p-8 h-[92vh] overflow-y-scroll scrollbar-hide">
                 <Outlet />
             </main>
         </div>

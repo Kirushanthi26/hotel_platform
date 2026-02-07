@@ -1,73 +1,64 @@
-# React + TypeScript + Vite
+# Hotel Management System Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend application for the Hotel Management System, built with modern web technologies to provide a responsive and interactive user experience.
 
-Currently, two official plugins are available:
+## Technologies Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-   **React.js (with Vite):** A JavaScript library for building user interfaces, with Vite as a fast build tool.
+-   **TypeScript:** A typed superset of JavaScript that compiles to plain JavaScript.
+-   **React Router DOM:** For declarative routing in React applications.
+-   **React Query (TanStack Query):** For fetching, caching, synchronizing, and updating server state.
+-   **Axios:** A promise-based HTTP client for the browser and Node.js.
+-   **Zod:** A TypeScript-first schema declaration and validation library.
+-   **ShadCN UI:** A collection of re-usable components built using Radix UI and Tailwind CSS.
+-   **Tailwind CSS:** A utility-first CSS framework for rapidly building custom designs.
+-   **Date-fns:** A modern JavaScript date utility library.
+-   **Lucide React:** A beautiful collection of open-source icons.
 
-## React Compiler
+## Installation
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+To get the project up and running on your local machine, follow these steps:
 
-## Expanding the ESLint configuration
+1.  **Clone the repository:**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+    ```bash
+    git clone <repository-url>
+    cd frontend
+    ```
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2.  **Install dependencies:**
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+    ```bash
+    npm install
+    ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Running the Project
+
+After installation, you can run the development server:
+
+```bash
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+This will start the Vite development server, and you can access the application in your browser, typically at `http://localhost:5173`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## API Endpoints
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+This frontend interacts with a backend API, assumed to be running on `http://localhost:8000`. Key endpoints include:
+
+-   **Authentication:** `POST http://localhost:8000/api/v1/login/access-token`
+-   **User Details:** `GET http://localhost:8000/api/v1/users/` (Protected)
+-   **Hotels:**
+    -   `GET http://localhost:8000/api/v1/hotels/` (Protected)
+    -   `GET http://localhost:8000/api/v1/hotels/{id}` (Protected)
+    -   `POST http://localhost:8000/api/v1/hotels/` (Protected)
+    -   `PUT http://localhost:8000/api/v1/hotels/{id}` (Protected)
+    -   `DELETE http://localhost:8000/api/v1/hotels/{id}` (Protected)
+-   **Room Types:**
+    -   `GET http://localhost:8000/api/v1/room-types/` (Protected)
+    -   `POST http://localhost:8000/api/v1/room-types/` (Protected)
+    -   `PUT http://localhost:8000/api/v1/room-types/{id}` (Protected)
+    -   `DELETE http://localhost:8000/api/v1/room-types/{id}` (Protected)
+-   **Rate Adjustments:**
+    -   `GET http://localhost:8000/api/v1/rate-adjustments/` (Protected)
+    -   `POST http://localhost:8000/api/v1/rate-adjustments/` (Protected)

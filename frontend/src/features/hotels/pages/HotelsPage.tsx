@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
 import { EditHotelDialog } from "../components/EditHotelDialog";
+import { Link } from "react-router-dom";
 
 
 
@@ -67,7 +68,11 @@ export const HotelsPage = () => {
                     <TableBody>
                         {hotels?.map((hotel) => (
                             <TableRow key={hotel.id}>
-                                <TableCell className="font-medium">{hotel.name}</TableCell>
+                                <TableCell className="font-medium">
+                                    <Link to={`/hotels/${hotel.id}`} className="hover:underline">
+                                        {hotel.name}
+                                    </Link>
+                                </TableCell>
                                 <TableCell>{`${hotel.city}, ${hotel.country}`}</TableCell>
                                 <TableCell>{format(new Date(hotel.updated_at), 'PPP')}</TableCell>
                                 <TableCell>

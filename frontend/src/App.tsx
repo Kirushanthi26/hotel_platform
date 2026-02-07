@@ -4,6 +4,7 @@ import { NotFoundPage } from "./features/misc/NotFoundPage"
 import { HotelsPage } from "./features/hotels/pages/HotelsPage"
 import { MainLayout } from "./components/layouts/MainLayout"
 import { ProtectedRoute } from "./components/layouts/ProtectedRoute"
+import { HotelDetailPage } from "./features/hotels/pages/HotelDetailPage"
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route element={<MainLayout />}>
               <Route path="hotels" element={<HotelsPage />} />
+              <Route path="hotels/:id" element={<HotelDetailPage />} />
             </Route>
           </Route>
           <Route path="login" element={<LogInPage />} />

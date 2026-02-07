@@ -33,12 +33,13 @@ export type HotelFormValues = z.infer<typeof hotelFormSchema>
 
 interface AddHotelFormProps {
   onSubmit: (values: HotelFormValues) => void;
+  initialValues?: HotelFormValues;
 }
 
-export function AddHotelForm({ onSubmit }: AddHotelFormProps) {
+export function AddHotelForm({ onSubmit, initialValues }: AddHotelFormProps) {
   const form = useForm<HotelFormValues>({
     resolver: zodResolver(hotelFormSchema),
-    defaultValues: {
+    defaultValues: initialValues || {
       hotelName: "",
       address: "",
       city: "",
@@ -101,7 +102,7 @@ export function AddHotelForm({ onSubmit }: AddHotelFormProps) {
             </FormItem>
           )}
         />
-        <Button type="submit">Add Hotel</Button>
+        <Button type="submit">{initialValues ? 'Update Hotel' : 'Add Hotel'}</Button>
       </form>
     </Form>
   )

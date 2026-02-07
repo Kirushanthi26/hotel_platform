@@ -1,5 +1,3 @@
-
-import { useState } from "react";
 import {
     Table,
     TableBody,
@@ -10,15 +8,28 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { AddHotelDialog } from "../components/AddHotelDialog";
+import { format } from "date-fns";
+import { useHotels } from "@/api/listOfHotels";
+import { useCreateHotel } from "@/api/createHotel";
 import type { HotelFormValues } from "../components/AddHotelForm";
 
 
+
 export const HotelsPage = () => {
-    const [hotels, setHotels] = useState<HotelFormValues[]>([]);
+    const { data: hotels, isLoading, isError } = useHotels();
+    const { mutate: createHotel } = useCreateHotel();
 
     const handleAddHotel = (hotel: HotelFormValues) => {
-        setHotels((prevHotels) => [...prevHotels, hotel]);
+        createHotel(hotel);
     };
+
+    if (isLoading) {
+        return <div>Loading hotels...</div>;
+    }
+
+    if (isError) {
+        return <div>Error loading hotels.</div>;
+    }
 
     return (
         <div>
@@ -36,15 +47,15 @@ export const HotelsPage = () => {
                         <TableRow>
                             <TableHead>Hotel</TableHead>
                             <TableHead>Location</TableHead>
-                            <TableHead>Room Types</TableHead>
+                            <TableHead>Last Updated</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {hotels.map((hotel, index) => (
-                            <TableRow key={index}>
-                                <TableCell className="font-medium">{hotel.hotelName}</TableCell>
+                        {hotels?.map((hotel) => (
+                            <TableRow key={hotel.id}>
+                                <TableCell className="font-medium">{hotel.name}</TableCell>
                                 <TableCell>{`${hotel.city}, ${hotel.country}`}</TableCell>
-                                <TableCell>Standard, Deluxe, Suite</TableCell>
+                                <TableCell>{format(new Date(hotel.updated_at), 'PPP')}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
